@@ -1,9 +1,11 @@
-function table(name1){
+function Addrecord(name1){
 
 var t1 = document.getElementById("table");
 
 var csize=document.getElementById("table").rows.length;
 
+csize+=1;
+console.log(csize);
     if(name1!=''){    
     var name = name1;
     }
@@ -14,9 +16,9 @@ var csize=document.getElementById("table").rows.length;
 var c=document.getElementById("count")
 c.innerHTML= csize +" Employees";
 var row = t1.insertRow();
-
-var btn1 = "<button class='edit' onclick='edit("+cell1+") id='row'>Edit</button>";
-var btn2 = "<button class='del' onclick='del("+btn2+")'>Delete</button>";
+row.id=csize;
+var btn1 = "<button class='edit' onclick='edit("+csize+")' id='csize'>Edit</button>";
+var btn2 = "<button class='del' onclick='del("+row.id+")'>Delete</button>";
 
 var cell1 = row.insertCell(0);
 var cell2 = row.insertCell(1);
@@ -26,14 +28,16 @@ cell1.innerHTML = name;
 cell2.innerHTML = btn1;
 cell3.innerHTML = btn2;
 }
-function edit(){
+function editrecord(name){
     var newname;
     newname=prompt("Enter new name");
-    table(newname);
-
+    var name1=document.getElementById(name);
+    name1.cells[0].innerHTML=newname;
 }
-function del(){
-    document.getElementById("table").deleteRow();
-    var c=document.getElementById("count")
-    c.innerHTML= (cs-1) +" Employees";
+function deleterecord(rowid){
+    var count=document.getElementById(rowid).rowIndex;
+    var csize= document.getElementById("table").rows.length;
+    document.getElementById("table").deleteRow(count);
+    var c=document.getElementById('count');
+    c.innerHTML= (csize-1) +" Employees";
 }
